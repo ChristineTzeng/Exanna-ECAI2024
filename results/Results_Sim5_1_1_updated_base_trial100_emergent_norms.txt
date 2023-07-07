@@ -1,0 +1,52 @@
+===========================
+[total: 3370858, accepts: 1947238, rejects: 1423620, resolution: 57.766836, wearAccepts: 1379066, notWearAccepts: 568172, wearRejects: 700950, notWearRejects: 722670]
+HOME stats: [total: 333742, accepts: 187277, rejects: 146465, resolution: 56.114304, wearAccepts: 106315, notWearAccepts: 80962, wearRejects: 70457, notWearRejects: 76008]
+OFFICE stats: [total: 709862, accepts: 479209, rejects: 230653, resolution: 67.507346, wearAccepts: 420134, notWearAccepts: 59075, wearRejects: 119841, notWearRejects: 110812]
+PARTY stats: [total: 708954, accepts: 364289, rejects: 344665, resolution: 51.384011, wearAccepts: 198321, notWearAccepts: 165968, wearRejects: 165019, notWearRejects: 179646]
+PARK stats: [total: 808574, accepts: 410421, rejects: 398153, resolution: 50.758619, wearAccepts: 206048, notWearAccepts: 204373, wearRejects: 192385, notWearRejects: 205768]
+HOSPITAL stats: [total: 809726, accepts: 506042, rejects: 303684, resolution: 62.495461, wearAccepts: 448248, notWearAccepts: 57794, wearRejects: 153248, notWearRejects: 150436]
+===========================
+
+========== Interaction Based explanation stats ===============
+===========================
+[total: 3370858, accepts: 1947238, rejects: 1423620, resolution: 57.766836, wearAccepts: 1379066, notWearAccepts: 568172, wearRejects: 700950, notWearRejects: 722670]
+HOME stats: [total: 333742, accepts: 187277, rejects: 146465, resolution: 56.114304, wearAccepts: 106315, notWearAccepts: 80962, wearRejects: 70457, notWearRejects: 76008]
+OFFICE stats: [total: 709862, accepts: 479209, rejects: 230653, resolution: 67.507346, wearAccepts: 420134, notWearAccepts: 59075, wearRejects: 119841, notWearRejects: 110812]
+PARTY stats: [total: 708954, accepts: 364289, rejects: 344665, resolution: 51.384011, wearAccepts: 198321, notWearAccepts: 165968, wearRejects: 165019, notWearRejects: 179646]
+PARK stats: [total: 808574, accepts: 410421, rejects: 398153, resolution: 50.758619, wearAccepts: 206048, notWearAccepts: 204373, wearRejects: 192385, notWearRejects: 205768]
+HOSPITAL stats: [total: 809726, accepts: 506042, rejects: 303684, resolution: 62.495461, wearAccepts: 448248, notWearAccepts: 57794, wearRejects: 153248, notWearRejects: 150436]
+===========================
+
+========== Interaction Based explanation stats ends===============
+== Location Stats==
+======== Location Stats ============
+HOME:== [total: 3370858, stat: 333742, ratio (stat/total): 0.099008]
+OFFICE:== [total: 3370858, stat: 709862, ratio (stat/total): 0.210588]
+PARTY:== [total: 3370858, stat: 708954, ratio (stat/total): 0.210319]
+PARK:== [total: 3370858, stat: 808574, ratio (stat/total): 0.239872]
+HOSPITAL:== [total: 3370858, stat: 809726, ratio (stat/total): 0.240214]
+========== Location Stats end ==============
+
+======== Relationship Stats ============
+FAMILY:== [total: 3370858, stat: 234684, ratio (stat/total): 0.069621]
+FRIEND:== [total: 3370858, stat: 957702, ratio (stat/total): 0.284112]
+COLLEAGUE:== [total: 3370858, stat: 695218, ratio (stat/total): 0.206244]
+STRANGER:== [total: 3370858, stat: 1483254, ratio (stat/total): 0.440023]
+========== Relationship Stats end ==============
+
+========== Agent types stats ===============
+===========================
+[total: 3370858, accepts: 1947238, rejects: 1423620, resolution: 57.766836, wearAccepts: 1379066, notWearAccepts: 568172, wearRejects: 700950, notWearRejects: 722670]
+HEALTH vs HEALTH stats: [total: 867930, accepts: 640483, rejects: 227447, resolution: 73.794315, wearAccepts: 535423, notWearAccepts: 105060, wearRejects: 111838, notWearRejects: 115609]
+HEALTH vs FREEDOM stats: [total: 844856, accepts: 444982, rejects: 399874, resolution: 52.669567, wearAccepts: 316772, notWearAccepts: 128210, wearRejects: 282753, notWearRejects: 117121]
+FREEDOM vs HEALTH stats: [total: 844856, accepts: 454527, rejects: 390329, resolution: 53.799346, wearAccepts: 337996, notWearAccepts: 116531, wearRejects: 106251, notWearRejects: 284078]
+FREEDOM vs FREEDOM stats: [total: 813216, accepts: 407246, rejects: 405970, resolution: 50.078454, wearAccepts: 188875, notWearAccepts: 218371, wearRejects: 200108, notWearRejects: 205862]
+===========================
+
+========== Agent types stats ends===============
+Avg_privacy_loss: 1.000000
+Avg_payoff: 0.575773
+Avg_goal_satisfaction: 0.924013
+=== Final Emergent Norms ===
+[Norm{consequent=WEAR; conditions=Context{actorHealth=NO_RISK; preference=NOT_WEAR; OberverAgentTypeHEALTH; observerRelationship=COLLEAGUE; interactLocation=OFFICE}}, popularity: 0.925000]
+[Norm{consequent=WEAR; conditions=Context{actorHealth=RISK; preference=NOT_WEAR; OberverAgentTypeHEALTH; observerRelationship=COLLEAGUE; interactLocation=OFFICE}}, popularity: 0.915000]

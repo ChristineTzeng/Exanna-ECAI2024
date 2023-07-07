@@ -1,0 +1,42 @@
+===========================
+[total: 3369556, accepts: 1929397, rejects: 1440159, cohesion: 57.259681, wearAccepts: 1444299, notWearAccepts: 485098, wearRejects: 713509, notWearRejects: 726650]
+HOME stats: [total: 334348, accepts: 183046, rejects: 151302, cohesion: 54.747150, wearAccepts: 118880, notWearAccepts: 64166, wearRejects: 72173, notWearRejects: 79129]
+OFFICE stats: [total: 709936, accepts: 464591, rejects: 245345, cohesion: 65.441251, wearAccepts: 402867, notWearAccepts: 61724, wearRejects: 132956, notWearRejects: 112389]
+PARTY stats: [total: 707546, accepts: 369648, rejects: 337898, cohesion: 52.243670, wearAccepts: 238801, notWearAccepts: 130847, wearRejects: 160379, notWearRejects: 177519]
+PARK stats: [total: 808156, accepts: 413305, rejects: 394851, cohesion: 51.141735, wearAccepts: 246389, notWearAccepts: 166916, wearRejects: 190682, notWearRejects: 204169]
+HOSPITAL stats: [total: 809570, accepts: 498807, rejects: 310763, cohesion: 61.613820, wearAccepts: 437362, notWearAccepts: 61445, wearRejects: 157319, notWearRejects: 153444]
+===========================
+
+========== Interaction Based explanation stats ===============
+===========================
+[total: 3369556, accepts: 1929397, rejects: 1440159, cohesion: 57.259681, wearAccepts: 1444299, notWearAccepts: 485098, wearRejects: 713509, notWearRejects: 726650]
+HOME stats: [total: 334348, accepts: 183046, rejects: 151302, cohesion: 54.747150, wearAccepts: 118880, notWearAccepts: 64166, wearRejects: 72173, notWearRejects: 79129]
+OFFICE stats: [total: 709936, accepts: 464591, rejects: 245345, cohesion: 65.441251, wearAccepts: 402867, notWearAccepts: 61724, wearRejects: 132956, notWearRejects: 112389]
+PARTY stats: [total: 707546, accepts: 369648, rejects: 337898, cohesion: 52.243670, wearAccepts: 238801, notWearAccepts: 130847, wearRejects: 160379, notWearRejects: 177519]
+PARK stats: [total: 808156, accepts: 413305, rejects: 394851, cohesion: 51.141735, wearAccepts: 246389, notWearAccepts: 166916, wearRejects: 190682, notWearRejects: 204169]
+HOSPITAL stats: [total: 809570, accepts: 498807, rejects: 310763, cohesion: 61.613820, wearAccepts: 437362, notWearAccepts: 61445, wearRejects: 157319, notWearRejects: 153444]
+===========================
+
+========== Interaction Based explanation stats ends===============
+== Location Stats==
+======== Location Stats ============
+HOME:== [total: 3369556, stat: 334348, ratio (stat/total): 0.099226]
+OFFICE:== [total: 3369556, stat: 709936, ratio (stat/total): 0.210691]
+PARTY:== [total: 3369556, stat: 707546, ratio (stat/total): 0.209982]
+PARK:== [total: 3369556, stat: 808156, ratio (stat/total): 0.239841]
+HOSPITAL:== [total: 3369556, stat: 809570, ratio (stat/total): 0.240260]
+========== Location Stats end ==============
+
+======== Relationship Stats ============
+FAMILY:== [total: 3369556, stat: 235270, ratio (stat/total): 0.069822]
+FRIEND:== [total: 3369556, stat: 938010, ratio (stat/total): 0.278378]
+COLLEAGUE:== [total: 3369556, stat: 687498, ratio (stat/total): 0.204032]
+STRANGER:== [total: 3369556, stat: 1508778, ratio (stat/total): 0.447768]
+========== Relationship Stats end ==============
+
+Avg information cost: 1.000000
+Avg payoff: 0.582531
+Avg goal satisfaction: 0.901268
+=== Final Emergent Norms ===
+[Norm{consequent=WEAR; conditions=Context{actorHealth=RISK; preference=NOT_WEAR; OberverAgentTypeHEALTH; observerRelationship=COLLEAGUE; interactLocation=OFFICE}}, popularity: 0.925000]
+[Norm{consequent=WEAR; conditions=Context{actorHealth=NO_RISK; preference=NOT_WEAR; OberverAgentTypeHEALTH; observerRelationship=COLLEAGUE; interactLocation=OFFICE}}, popularity: 0.920000]
