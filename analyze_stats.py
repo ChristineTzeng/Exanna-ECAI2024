@@ -23,8 +23,6 @@ emergent_norms = False
 def get_payoff_scheme_token(payoff_scheme):
     if payoff_scheme == '2':
         return '_updated_base'
-    elif payoff_scheme == '3':
-        return '_multi_updated_base'
     else:
         return ''
 

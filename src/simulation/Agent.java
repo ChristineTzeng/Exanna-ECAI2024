@@ -299,7 +299,7 @@ public class Agent implements Steppable {
                 Agent neighbor = null;
                 Agent temp = null;
               //make sure that each agent is only paired up once in each step
-                for(int i=0;i<this.currentNeighbors.size();i++){
+                for(int i = 0; i < this.currentNeighbors.size(); i++){
                 	temp = (Agent) this.currentNeighbors.get(i);
                     if (!temp.isPairedUp && temp.id != this.id) {
                     	neighbor = temp;
