@@ -15,7 +15,6 @@ public class Context {
     public Preference preference;
     public Relationship observerRelationship;
     public Location interactLocation;
-//	public Health observerHealth;
 	
 	public Health sharedHealth;
 	public Preference sharedPreference;
@@ -25,7 +24,6 @@ public class Context {
         context.actorHealth = (Health) vector.get(0);
         context.preference = (Preference) vector.get(1);
         context.observerAgentType = (AgentType) vector.get(2);
-//        context.observerHealth = (Health) vector.get(3);
         context.observerRelationship = (Relationship) vector.get(3);
         context.interactLocation = (Location) vector.get(4);
         return context;
@@ -49,7 +47,6 @@ public class Context {
         public Preference preference;
         public Location interactLocation;
 		private Relationship observerRelationship = null;
-//		public Health observerHealth = null;
 		private AgentType observerAgentType = null;
 		public Health sharedHealth;
 		public Preference sharedPreference;
@@ -63,11 +60,6 @@ public class Context {
             this.sharedHealth = sharedHealth;
             return this;
         }
-        
-//        public Builder observerHealth(Health observerHealth) {
-//            this.observerHealth = observerHealth;
-//            return this;
-//        }
 
         public Builder preference(Preference preference) {
             this.preference = preference;
@@ -114,7 +106,6 @@ public class Context {
         if (context.actorHealth == null) context.actorHealth = other.actorHealth;
         if (context.preference == null) context.preference = other.preference;
         if (context.observerAgentType == null) context.observerAgentType = other.observerAgentType;
-//        if (context.observerHealth == null) context.observerHealth = other.observerHealth;
         if (context.observerRelationship == null) context.observerRelationship = other.observerRelationship;
         if (context.interactLocation == null) context.interactLocation = other.interactLocation;
         return context;
@@ -124,7 +115,6 @@ public class Context {
         if (this.actorHealth == null) this.actorHealth = other.actorHealth;
         if (this.preference == null) this.preference = other.preference;
         if (this.observerAgentType == null) this.observerAgentType = other.observerAgentType;
-//        if (this.observerHealth == null) this.observerHealth = other.observerHealth;
         if (this.observerRelationship == null) this.observerRelationship = other.observerRelationship;
         if (this.interactLocation == null) this.interactLocation = other.interactLocation;
     }
@@ -137,14 +127,12 @@ public class Context {
         return actorHealth == context.actorHealth &&
         		preference == context.preference &&
         		observerAgentType == context.observerAgentType &&
-//        		observerHealth == context.observerHealth &&
         		observerRelationship == context.observerRelationship &&
                 interactLocation == context.interactLocation;
     }
 
     @Override
     public int hashCode() {
-//        return Objects.hash(actorHealth, preference, observerAgentType, observerHealth, observerRelationship, interactLocation);
         return Objects.hash(actorHealth, preference, observerAgentType, observerRelationship, interactLocation);
     }
 
@@ -154,7 +142,6 @@ public class Context {
                 (actorHealth == null ? "" : ("actorHealth=" + actorHealth)) +
                 (preference == null ? "" : ("; preference=" + preference)) +
                 (observerAgentType == null ? "" : "; OberverAgentType" + observerAgentType.toString()) +
-//                (observerHealth == null ? "" : ("; observerHealth=" + observerHealth)) +
                 (observerRelationship == null ? "" : ("; observerRelationship=" + observerRelationship)) +
                 (interactLocation == null ? "" : ("; interactLocation=" + interactLocation)) +
                 '}';
@@ -165,7 +152,6 @@ public class Context {
         vector.add(actorHealth);
         vector.add(preference);
         vector.add(observerAgentType);
-//        vector.add(observerHealth);
         vector.add(observerRelationship);
         vector.add(interactLocation);
         return vector;

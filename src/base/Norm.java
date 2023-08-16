@@ -19,11 +19,9 @@ public class Norm {
 
     private static Predicate<Context> getAntecedent(Context conditions) {
         return context -> {
-//            if (conditions.actorAgentType != null && conditions.actorAgentType != context.actorAgentType)  return false;
             if (conditions.actorHealth != null && conditions.actorHealth != context.actorHealth)  return false;
             if (conditions.preference != null && conditions.preference != context.preference)  return false;
             if (conditions.observerAgentType != null && conditions.observerAgentType != context.observerAgentType)  return false;
-//            if (conditions.observerHealth != null && conditions.observerHealth != context.observerHealth)  return false;
             if (conditions.observerRelationship != null && conditions.observerRelationship != context.observerRelationship) return false;
             if (conditions.interactLocation != null && conditions.interactLocation != context.interactLocation) return false;
             return true;

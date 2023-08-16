@@ -25,7 +25,6 @@ public class RecordForLearning {
     public boolean existsFriend;
     public double observerPayoff;
     public double actorPayoff;
-//    public double averageNeighborPayoff;
     public Agent agent;
     
     public RecordForLearning(){
@@ -68,7 +67,6 @@ public class RecordForLearning {
         this.existsColleague = false;
         this.existsFriend = false;
 
-        //callee payoff and caller payoff
         this.observerPayoff = 0.0;
         this.actorPayoff = 0.0;
         if (interaction.observer != null) {
