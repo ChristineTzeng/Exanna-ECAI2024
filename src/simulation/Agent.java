@@ -61,13 +61,13 @@ public class Agent implements Steppable {
     //neighboring behavior to which this agent needs to give feedbacks
     public Bag neighboringBehaviors = new Bag();
     
-    //No. of instances learnt in reinforcement learning
+    //No. of instances to learn in reinforcement learning
     public int rlDataInstancesCount;
 
     //current neighbors;
     public Bag currentNeighbors = new Bag();
     
-    //lock to avoid being called twice in a step. 
+    //lock to avoid being paired twice in a step. 
     public boolean isPairedUp = false;
     public Interaction currentInteraction = null;
     
@@ -149,7 +149,6 @@ public class Agent implements Steppable {
     		.actorHealth(Health.get(interaction.actor.health))
     		.preference(Preference.get(interaction.actor.preference))
     		.observerAgentType(interaction.observer.agentType)
-//    		.observerHealth(Health.get(interaction.observerHealth))
             .interactLocation(Location.get(interaction.location / Agents.numAgents))
             .observerRelationship(interaction.getInteractionRelationship())
             .build();
@@ -296,7 +295,6 @@ public class Agent implements Steppable {
     		.actorHealth(Health.get(interaction.actor.health))
     		.preference(Preference.get(interaction.actor.preference))
     		.observerAgentType(interaction.observer.agentType)
-//    		.observerHealth(Health.get(interaction.observerHealth))
             .interactLocation(Location.get(interaction.location / Agents.numAgents))
             .observerRelationship(interaction.getInteractionRelationship())
             .build();
@@ -371,14 +369,9 @@ public class Agent implements Steppable {
             Context fullContext = null;
             if (interaction.observer != null)
             	fullContext = Context.builder()
-//        		.actorHealth(Health.get(interaction.observer.health))
         		.actorHealth(Health.get(interaction.actor.health))
-//        		.preference(Preference.get(interaction.observer.preference))
         		.preference(Preference.get(interaction.actor.preference))
         		.observerAgentType(interaction.observer.agentType)
-//        		.observerAgentType(interaction.actor.agentType)
-//        		.observerHealth(Health.get(interaction.actorHealth))
-//        		.observerHealth(Health.get(interaction.observerHealth))
         		.sharedHealth(Health.get(interaction.actor.health))
         		.sharedPreference(Preference.get(interaction.actor.preference))
                 .interactLocation(Location.get(interaction.location / Agents.numAgents))
@@ -387,9 +380,7 @@ public class Agent implements Steppable {
             else
     	        fullContext = Context.builder()
     	        		.actorHealth(Health.get(interaction.actor.health))
-//    	        		.actorHealth(Health.get(interaction.observer.health))
     	        		.preference(Preference.get(interaction.actor.preference))
-//    	        		.preference(Preference.get(interaction.observer.preference))
     	                .interactLocation(Location.get(interaction.location / Agents.numAgents))
     	                .observerRelationship(null)
     	                .build();
@@ -402,7 +393,6 @@ public class Agent implements Steppable {
                             .actorHealth(Health.get(interaction.observer.health))
                     		.preference(Preference.get(interaction.observer.preference))
                     		.observerAgentType(interaction.actor.agentType)
-//                    		.observerHealth(Health.get(interaction.actorHealth))
                             .interactLocation(Location.get(interaction.location / Agents.numAgents))
                             .observerRelationship(interaction.getInteractionRelationship())
                             .build();
@@ -421,7 +411,6 @@ public class Agent implements Steppable {
                             .actorHealth(Health.get(interaction.observer.health))
                     		.preference(Preference.get(interaction.observer.preference))
                     		.observerAgentType(interaction.actor.agentType)
-//                    		.observerHealth(Health.get(interaction.actorHealth))
                             .interactLocation(Location.get(interaction.location / Agents.numAgents))
                             .observerRelationship(interaction.getInteractionRelationship())
                             .build();

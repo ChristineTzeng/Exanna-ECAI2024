@@ -19,7 +19,10 @@ import java.util.stream.Collectors;
 public class Agents extends SimState {
 
     //Which simulation are we doing?
-    public static int simulationNumber = 5;//4;5;6
+    //4: share all
+	//5: share rules
+	//6: exanna
+    public static int simulationNumber = 5;
 
     public static int trial = 101;
 
@@ -122,9 +125,6 @@ public class Agents extends SimState {
 
     public Bag allInteractions = new Bag();
     
-    //sum of #neighbors of all calls in a step
-    //different from #neighbors involved in calls
-    //average happiness of involved people in a step
     public double overallSatisfaction = 0.0;
     //total payoff in a step
     public double payoff = 0.0;
@@ -187,7 +187,6 @@ public class Agents extends SimState {
     	return simulationNumber >= 3;
     }
 
-    // simulationNumber > 3: listenExplanaitons
     public static boolean isListenExplanation() {
         return (simulationNumber != 7) && (simulationNumber >= 4);
     }
@@ -353,8 +352,6 @@ public class Agents extends SimState {
         //reset isPairedUp and currentInteraction of each agent.
         schedule.scheduleRepeating(new Steppable(){
             public void step(SimState state){
-//                if (state.schedule.getSteps()<=1)
-//                    return;
                 Agents agents = (Agents)state;
                 Agent temp;
                 
@@ -371,9 +368,6 @@ public class Agents extends SimState {
                         if (isLCS()) {
                             temp.addRecordLCS(record, temp.currentInteraction);
                         } 
-//                        else {
-//                        	//Weka dataset: removed
-//                        }
                         
                         temp.isPairedUp = false;
                         temp.currentInteraction = null;
@@ -419,11 +413,9 @@ public class Agents extends SimState {
                     
                     if (interaction.observer != null) {
                     	Context interactionContext = Context.builder().interactLocation(Location.get(interaction.location / Agents.numAgents))
-//           	   				 .actorAgentType(interaction.actor.agentType)
         	   				 .actorHealth(Health.get(interaction.actor.health))
         	   				 .preference(Preference.get(interaction.actor.preference))
         	   				 .observerAgentType(interaction.observer.agentType)
-//        	   				 .observerHealth(Health.get(interaction.observerHealth))
         	   				 .observerRelationship(interaction.getInteractionRelationship())
         	   				 .build();
             	        actorPayoff = agents.payoffCalculator.calculateActorPayoff(
@@ -432,7 +424,6 @@ public class Agents extends SimState {
             	        		interactionContext, Action.fromID(counterpartAction), interaction.actor.agentType.weights);
                     } else {
                     	Context interactionContext = Context.builder().interactLocation(Location.get(interaction.location / Agents.numAgents))
-//                 				 .actorAgentType(interaction.actor.agentType)
               				 .actorHealth(Health.get(interaction.actor.health))
               				 .preference(Preference.get(interaction.actor.preference))
               				 .observerRelationship(interaction.getInteractionRelationship())
@@ -444,6 +435,7 @@ public class Agents extends SimState {
                     }
                     
                     // calculate goal satisfaction
+                    // if the payoff of the selected action is smaller than other other, the agent deviates from its goal
                     if (actorPayoff < actorPayoffCounterpart){
                     	overallSatisfaction -= 1.0;
                     	satisfactionByAgentType.add(interaction.actor, false);
@@ -537,7 +529,6 @@ public class Agents extends SimState {
                     totalInteractionCount += interactionCount;
                 }
                 if (totalInteractionCount > 0)
-                //payoff /= window.size();
                 	payoff /= totalInteractionCount;
                 
                 //Use average over window2 as output
@@ -570,7 +561,6 @@ public class Agents extends SimState {
                         
                         for (AgentType type : AgentType.values()) {
                             agentPayoffTokens.add(Double.toString(observerPayoffs.getAvgPayoff(type)));
-//                            Debugger.debug("observerPayoffAvg", observerPayoffs.getAvgPayoff(type));
                         }
                         agentTypeObserverPayoffInWindow.clear();
                         for (AgentType type : AgentType.values()) {
@@ -918,7 +908,6 @@ public class Agents extends SimState {
         }
 
         public double getAvgPayoff(AgentType type) {
-//            boolean debug = type == AgentType.GENEROUS;
             LinkedHashMap<Long, Double> typePayoffWindow = payoffWindow.get(type);
             LinkedHashMap<Long, Integer> typeCountWindow = countWindow.get(type);
             int total = 0;
