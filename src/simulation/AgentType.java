@@ -5,6 +5,9 @@ import java.util.Objects;
 import base.Location;
 import base.Norm;
 
+/**
+ * Defines agent types and associated value preferences
+ */
 public enum AgentType {
     HEALTH(0, new double[]{1.0, 0.0}, "HEALTH"),
     FREEDOM(1, new double[]{0.0, 1.0}, "FREEDOM");
@@ -41,8 +44,4 @@ public enum AgentType {
     public String toString() {
         return this.name;
     }
-
-//    AgentType(double[] weights) {
-//        this.weights = weights;
-//    }
 }

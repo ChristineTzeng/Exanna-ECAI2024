@@ -55,7 +55,6 @@ public class RecordForLearning {
         if (interaction.observer == null) {
         	this.existsObserver = false;
         	this.observerRelationship = -1;
-//        	this.observerHealth = -1;
         	this.observerAgentType = -1;
         } else {
         	this.existsObserver = true;
@@ -118,7 +117,6 @@ public class RecordForLearning {
       				 .observerRelationship(interaction.getInteractionRelationship())
       				 .build(), Action.fromID(interaction.action), interaction.actor.agentType.weights);
         }
-//        Debugger.debug("actorPayoff", actorPayoff, "observerPayoff", observerPayoff);
     }
     
     public double getPayoff(){
@@ -131,19 +129,6 @@ public class RecordForLearning {
     public double getObserverPayoff(){
         return observerPayoff;
     }
-    
-//    public int getOrdinalFeedback(){
-//        double payoff = this.getPayoff();
-//        if (payoff>=1) return 2;
-//        else if (payoff>=0.5)
-//            return 1;
-//        else if (payoff>=-0.5)
-//            return 0;
-//        else if (payoff>=-1)
-//            return -1;
-//        else
-//            return -2;
-//    }
     
     public String toCSVString(){
         return Agents.locations[location] + ","

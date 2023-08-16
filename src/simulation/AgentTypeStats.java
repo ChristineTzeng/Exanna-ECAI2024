@@ -54,9 +54,7 @@ public abstract class AgentTypeStats {
 
     public static class Statistics {
         public StatisticsUtil globalStats;
-//        public Map<AgentType, StatisticsUtil> agentTypeStats;
         public Map<AgentType, Map<AgentType, StatisticsUtil>> agentTypeStats;
-//        public Map<AgentTypesKey, StatisticsUtil> agentTypeStats;
 
         public Statistics() {
             this.globalStats = new StatisticsUtil();
@@ -73,11 +71,6 @@ public abstract class AgentTypeStats {
         public void addAccept(Action action) {
             this.globalStats.addAccept(action);
         }
-
-//        public void addAccept(Action action, AgentType agentType) {
-//            this.globalStats.addAccept(action);
-//            this.agentTypeStats.get(agentType).addAccept(action);
-//        }
         
         public void addAccept(Action action, AgentType actorAgentType, AgentType observerAgentType) {
             this.globalStats.addAccept(action);
@@ -98,10 +91,6 @@ public abstract class AgentTypeStats {
             StringBuilder builder = new StringBuilder();
             builder.append("===========================\n");
             builder.append(this.globalStats.toString()).append("\n");
-//            for (AgentType agentType : AgentType.values()) {
-//                builder.append(String.format("%s stats: %s\n", agentType.name(),
-//                        this.agentTypeStats.get(agentType).toString()));
-//            }
             for (AgentType actorAgentType : AgentType.values()) {
             	for (AgentType observerAgentType : AgentType.values()) {
             		builder.append(String.format("%s vs %s stats: %s\n", actorAgentType.name(), observerAgentType.name(),

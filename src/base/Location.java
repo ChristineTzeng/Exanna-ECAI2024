@@ -1,5 +1,8 @@
 package base;
 
+/**
+ * Defines locations
+ */
 public enum Location {
     HOME (0), OFFICE (1), PARTY (2), PARK (3), HOSPITAL (4);
     

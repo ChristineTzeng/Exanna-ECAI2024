@@ -48,10 +48,6 @@ public class ButzFitnessWeightedActionSelection implements ActionSelectionStrate
                 possibleActions.add(action);
             }
         }
-//        if (debug && possibleActions.contains(Action.IGNORE)) {
-//            Debugger.debug(possibleActions, "possibleActions");
-//            matchSet.print();
-//        }
         return possibleActions;
     }
 

@@ -1,5 +1,8 @@
 package base;
 
+/**
+ * Defines personal preferences
+ */
 public enum Preference {
     WEAR (0), NOT_WEAR (1);
     

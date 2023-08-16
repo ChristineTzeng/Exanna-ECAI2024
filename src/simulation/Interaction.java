@@ -44,14 +44,6 @@ public class Interaction {
         this.step = step;
         this.timeToGiveFeedbacks = 0;
         this.observerHealth = -1;
-        
-//        // observed health state for others
-//        if (this.actor.health != 0)
-////        	this.actorHealth = new Random().nextBoolean() ? 1 : 2;
-//        	this.actorHealth = 2;
-////        else
-//////        	this.actorHealth = 0;
-////        	this.actorHealth = new Random().nextBoolean() ? 0 : 2;
     }
     
     public Interaction(Agent actor, Agent observer, int location, long step){
@@ -62,22 +54,6 @@ public class Interaction {
         this.location = location;
         this.step = step;
         this.timeToGiveFeedbacks = 0;
-        
-//        // observed health state for others
-//        if (this.actor.health != 0)
-////        	this.actorHealth = new Random().nextBoolean() ? 1 : 2;
-//        	this.actorHealth = 2;
-////        else
-//////        	this.actorHealth = 0;
-////        	this.actorHealth = new Random().nextBoolean() ? 0 : 2;
-//        
-//        // observed health state for actor
-//        if (this.observer.health != 0)
-////        	this.observerHealth = new Random().nextBoolean() ? 1 : 2;
-//        	this.observerHealth = 2;
-////        else
-//////        	this.observerHealth = 0;
-////        	this.observerHealth = new Random().nextBoolean() ? 0 : 2;
     }
     
     public void switchRoles() {

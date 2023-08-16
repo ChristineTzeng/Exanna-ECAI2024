@@ -28,10 +28,6 @@ public class BaseLCSExplanation implements LCSAlgorithm {
     private DeletionStrategy deletionStrategy;
     private ExplorationStrategy explorationStrategy;
 
-//    private boolean debug = false;
-//    private int temp = 0;
-//    private int maxTemp = 200;
-
     public BaseLCSExplanation(MersenneTwisterFast random,
     		ExplanationSelectionStrategy explanationSelectionStrategy,
                    CoveringStrategy coveringStrategy,
@@ -77,10 +73,6 @@ public class BaseLCSExplanation implements LCSAlgorithm {
 
     @Override
     public Explanation getExplanation(Context context) {
-//        temp++;
-//        if (!debug && temp > maxTemp) {
-//            debug = true;
-//        }
         if (explorationStrategy.explore()) {
             return Explanation.get(random.nextInt(Explanation.values().length));
         } else {

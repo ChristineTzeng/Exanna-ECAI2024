@@ -49,10 +49,6 @@ public class ButzFitnessWeightedExplanationSelection implements ExplanationSelec
             	possibleExplanations.add(explanation);
             }
         }
-//        if (debug && possibleActions.contains(Action.IGNORE)) {
-//            Debugger.debug(possibleActions, "possibleActions");
-//            matchSet.print();
-//        }
         return possibleExplanations;
     }
     

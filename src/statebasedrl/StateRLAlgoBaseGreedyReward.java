@@ -62,7 +62,6 @@ public class StateRLAlgoBaseGreedyReward implements StateRLAlgorithm {
         Action[] actions = Action.values();
         for (Action action : actions) {
             double reward = getReward(context, action);
-            //Debugger.debug(reward, "reward", curr, "curr", decisions, "decisions");
             if (reward > curr) {
                 curr = reward;
                 decisions.clear();
@@ -71,10 +70,6 @@ public class StateRLAlgoBaseGreedyReward implements StateRLAlgorithm {
                 decisions.add(action);
             }
         }
-//        if (decisions.isEmpty()) {
-//            Debugger.debug(context, "context", valueMap, "valueMap");
-//            throw new RuntimeException();
-//        }
         return decisions;
     }
 }

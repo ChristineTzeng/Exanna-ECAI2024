@@ -1,5 +1,8 @@
 package base;
 
+/**
+ * Defines the state of health
+ */
 public enum Health {
 //    HEALTHY(0), ALLERGY(1), COVID(2); 
 	NO_RISK(0), RISK(1);

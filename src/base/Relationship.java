@@ -1,5 +1,8 @@
 package base;
 
+/**
+ * Defines agent relationships
+ */
 public enum Relationship {
     FAMILY (0), FRIEND (1), COLLEAGUE (2), STRANGER (3);
     

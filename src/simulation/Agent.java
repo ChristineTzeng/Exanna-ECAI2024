@@ -1,5 +1,4 @@
-package simulation;//import sim.engine.*;
-//import sim.util.*;
+package simulation;
 
 import java.util.*;
 
@@ -39,10 +38,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
 
-/**
- *
- * @author Hui
- */
 public class Agent implements Steppable {
     
     public int remainingSteps = 0;
@@ -66,12 +61,6 @@ public class Agent implements Steppable {
     //neighboring behavior to which this agent needs to give feedbacks
     public Bag neighboringBehaviors = new Bag();
     
-    //history of records for classification
-    //public Bag records = new Bag();
-    
-    //Weka dataset
-    public Instances data;
-
     //No. of instances learnt in reinforcement learning
     public int rlDataInstancesCount;
 
@@ -95,7 +84,6 @@ public class Agent implements Steppable {
         location = -1;
         remainingSteps = 0;
         this.id = -1;
-        initDataset();
         this.internalNorms = new ArrayList<>();
         this.rlDataInstancesCount = 0;
     }
@@ -105,7 +93,6 @@ public class Agent implements Steppable {
         location = -1;
         remainingSteps = 0;
         this.id = id;
-        initDataset();
         this.internalNorms = new ArrayList<>();
         this.rlDataInstancesCount = 0;
     }
@@ -114,7 +101,6 @@ public class Agent implements Steppable {
         location = -1;
         remainingSteps = 0;
         this.id = id;
-        initDataset();
         this.internalNorms = new ArrayList<>();
         this.rlDataInstancesCount = 0;
     }
@@ -141,10 +127,9 @@ public class Agent implements Steppable {
                 Arrays.asList(RecordForLearning.relationTypes)));
         alist.add(aa);
 
-        //urgency
-        List<String> tf = new ArrayList<String>();//True of False attributes
+        List<String> tf = new ArrayList<String>();
         tf.add("true");tf.add("false");
-        //answer or not
+        //wear or not
         aa = new Attribute("wear", tf);
         alist.add(aa);
         //payoff, numeric
@@ -154,11 +139,6 @@ public class Agent implements Steppable {
         Instances dataset = new Instances("Interaction Record", alist, 0);
         dataset.setClassIndex(dataset.numAttributes()-1);
         return dataset;
-    }
-
-    //Initialize the Weka dataset
-    public void initDataset(){
-        this.data = getEmptyDataset();
     }
 
     public void addRecordLCS(RecordForLearning rec, Interaction interaction) {
@@ -183,37 +163,6 @@ public class Agent implements Steppable {
         Action actorAction = Action.fromID(interaction.action);
         actionModel.learn(fullContext, actorAction, reward);
         this.rlDataInstancesCount++;
-    }
-
-//    private double getUpdatedWeight(double oldWeight, double reward) {
-//        return oldWeight + LEARNING_RATE * (reward - oldWeight);
-//    }
-
-    //Add a record to Weka dataset
-    public void addRecord(RecordForLearning rec){
-        double[] one = new double[data.numAttributes()];
-//        location', 'actorAgentType', 'actorHealth', 'preference', 'observerAgentType', 'observerHealth', 'relationship', 'action', 'payoff'
-//        location', 'actorAgentType', 'actorHealth', 'preference', 'observerAgentType', 'relationship', 'action', 'payoff'
-        //location
-        one[0] = rec.location;
-        //actorAgentType
-//        one[1] = rec.actorAgentType;
-        //actorHealth
-        one[1] = rec.actorHealth;
-        //preference
-        one[2] = rec.preference;
-        //observerAgentType
-        one[3] = rec.observerAgentType;
-//        //observerHealth
-//        one[4] = rec.observerHealth;
-      //relationship
-        one[4] = rec.observerRelationship;
-        //answer or not?
-        one[5] = rec.action;
-        //payoff
-        one[6] = rec.getPayoff();
-        
-        data.add(new DenseInstance(1.0, one));
     }
     
     public void step(SimState state){
@@ -268,16 +217,7 @@ public class Agent implements Steppable {
                 default:
                     location = i * agents.numAgents;
             }
-//            remainingSteps = (int)(agents.random.nextGaussian() * 30 + 60.5);
-//            if (remainingSteps > 90) remainingSteps = 90;
-//            if (remainingSteps < 30) remainingSteps = 30;
-//            remainingSteps *= agents.locationWeights[i];
         }
-//        }else{
-//            remainingSteps --;
-//        }
-        
-        //Once every agent enters a place
         
         if (this.isPairedUp) {
         	Interaction interaction = this.currentInteraction;
@@ -348,15 +288,6 @@ public class Agent implements Steppable {
         interaction.explanationStatistics = agents.explanationStatistics;
         agents.interactionRelationshipStats.add(interaction.getInteractionRelationship(), 1);
         agents.interactionLocationStats.add(Location.get(interaction.location / Agents.numAgents), 1);
-
-        //A better way to make a decision, with adaptive learning, 
-        //is using Weka's classification methods.
-        //Learning starts after a learning period
-        if ((Agents.simulationNumber <= 2) && (this.data.numInstances()>Agents.learningPeriod)){
-            int temp = getAction(interaction, state);
-            if (temp >= 0)
-            	interaction.action = temp;
-        }
 
         Context interactionContext = null;
         
@@ -436,14 +367,6 @@ public class Agent implements Steppable {
             Action actorAction = Action.fromID(interaction.action);
             //decide a feedback based on interaction info
             boolean accept = false;
-
-            //In the 2nd simulation,
-            //neighbor hears the complete explanation
-            if ((Agents.simulationNumber == 2) && (this.data.numInstances() > Agents.learningPeriod)){
-                //get the action that the neighbor would take
-                int action = getAction(interaction, state);
-                accept = action == interaction.action;
-            }
 
             Context fullContext = null;
             if (interaction.observer != null)
@@ -525,7 +448,6 @@ public class Agent implements Steppable {
             payoff = agents.payoffCalculator.calculateObserverPayoff(
                     Context.builder().observerRelationship(interaction.getInteractionRelationship()).build(), actorAction, accept);
 
-            //temp = new Feedback(call, this, feedback);
             temp = new Feedback(interaction, this, payoff);
             interaction.feedbacks.add(temp);
             if (Agents.MEASURE_TIME) {
@@ -538,118 +460,6 @@ public class Agent implements Steppable {
         return Agents.locations[location/Agents.numAgents]
                 +" #"+(location%Agents.numAgents);
     }
-
-    public List<Integer> getBulkAction(List<Interaction> interactions, SimState state) {
-        Agents agents = (Agents)state;
-        int action = -1;
-        Classifier cls = new LinearRegression();
-        List<Integer> actions = new ArrayList<>();
-        try {
-            cls.buildClassifier(data);
-            for (Interaction interaction : interactions) {
-                RecordForLearning rec = new RecordForLearning(interaction, agents, this);
-                double[] one = new double[data.numAttributes()];
-               //location
-                one[0] = rec.location;
-                //actorAgentType
-//                one[1] = rec.actorAgentType;
-                //actorHealth
-                one[1] = rec.actorHealth;
-                //preference
-                one[2] = rec.preference;
-                //observerAgentType
-                one[3] = rec.observerAgentType;
-//                //observerHealth
-//                one[4] = rec.observerHealth;
-              //relationship
-                one[4] = rec.observerRelationship;
-                //What if I not wear?
-                one[5] = 1;
-                //payoff
-                one[6] = 0;//0 for now
-
-                try {
-                    //What if I not wear?
-                    one[5] = 1;
-                    double a1 = cls.classifyInstance(new DenseInstance(1.0, one));
-                    //What if I wear?
-                    one[5] = 0;
-                    double a2 = cls.classifyInstance(new DenseInstance(1.0, one));
-
-                    //choose the action with higher predicted overall payoff
-                    if (a1 > a2)
-                        action = 1;
-                    else
-                        action = 0;
-                    actions.add(action);
-                } catch (Exception e) {
-                    //do nothing
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return actions;
-    }
-
-    //Decided, based on history, which action is better
-    public int getAction(Interaction interaction, SimState state){
-        Agents agents = (Agents)state;
-        int action = -1;
-        Classifier cls = new LinearRegression();
-        RecordForLearning rec = new RecordForLearning(interaction, agents, this);
-        double[] one = new double[data.numAttributes()];
-      //location
-        one[0] = rec.location;
-        //actorAgentType
-//        one[1] = rec.actorAgentType;
-        //actorHealth
-        one[1] = rec.actorHealth;
-        //preference
-        one[2] = rec.preference;
-        //observerAgentType
-        one[3] = rec.observerAgentType;
-//        //observerHealth
-//        one[4] = rec.observerHealth;
-      //relationship
-        one[4] = rec.observerRelationship;
-        //What if I not wear?
-        one[5] = 1;
-        //payoff
-        one[6] = 0;//0 for now
-
-        try{
-            cls.buildClassifier(data);
-            //What if I not wear?
-            one[5] = 1;
-            double a1 = cls.classifyInstance(new DenseInstance(1.0, one));
-            //What if I wear?
-            one[5] = 0;
-            double a2 = cls.classifyInstance(new DenseInstance(1.0, one));
-
-            //choose the action with higher predicted overall payoff
-            if (a1 > a2)
-                action = 1;
-            else
-                action = 0;
-        }
-        catch(Exception e){
-            //do nothing
-        }
-        return action;
-    }
-
-//    private static class DecisionResponse {
-//        public Action action;
-//        public Explanation explanation;
-//        public MatchingSet matchingSet;
-//
-//        public DecisionResponse(Action action, Explanation explanation, MatchingSet matchingSet) {
-//            this.action = action;
-//            this.explanation = explanation;
-//            this.matchingSet = matchingSet;
-//        }
-//    }
 
     public MatchingSet getMatchingSetForExplicitNorms(Context context) {
         MatchingSet matchingSet = new MatchingSet();
@@ -672,7 +482,6 @@ public class Agent implements Steppable {
         Randomizer randomizer = new Randomizer(state.random);
         this.actionModel = new BaseLCS(
                 state.random,
-//                new FitnessWeightedActionSelection(state.random),
                 getActionSelectionStrategy(state.random),
                 getCoveringStrategy(randomizer, parameters.dontCareProb),
                 new TournamentParentSelection(randomizer),

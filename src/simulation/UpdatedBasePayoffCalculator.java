@@ -17,7 +17,6 @@ public class UpdatedBasePayoffCalculator extends PayoffCalculator {
     
     private HashMap<Location, double[]> locationPayoffs;
     private HashMap<Relationship, double[]> relationshipPayoffs;
-//    private HashMap<Values, double[]> generalPayoffs;
     private HashMap<Values, double[]> generalPayoffs;
     private HashMap<Relationship, double[]> sanctionPayoffs;
 
@@ -35,23 +34,13 @@ public class UpdatedBasePayoffCalculator extends PayoffCalculator {
     	relationshipPayoffs.put(Relationship.COLLEAGUE, new double[] {0.5, -0.5});
     	relationshipPayoffs.put(Relationship.STRANGER, new double[] {1.0, -1.0});
     	
-//    	generalPayoffs = new HashMap<Values, double[]>();
     	generalPayoffs = new HashMap<Values, double[]>();
-    	// payoff table for approving/disapproving actions 
-//    	generalPayoffs.put(Values.HEALTH, new double[] {0.5, 0.5, 1.0, -0.5, -0.5, -1});
-//    	{healthy, allergy, infected} for wear, not wear for healthy, infected
-//    	generalPayoffs.put(Values.HEALTH, new double[][] {{0.0, 0.0, 1.0, 0.0, 0.0, -1}, {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}});
-//    	generalPayoffs.put(Values.HEALTH, new double[][] {{0.0, 0.0, 1.0, 0.0, 0.0, -1}, {0.0, 0.0, 0.0, 0.5, 0.5, 0.5}});
     	// updated healthy risk settings
     	generalPayoffs.put(Values.HEALTH, new double[] {0.0, 1.0, 0.0, 0.0, -1});
-//    	generalPayoffs.put(Values.FREEDOM, new double[] {});
     	generalPayoffs.put(Values.FREEDOM, new double[] {});
     	
     	sanctionPayoffs = new HashMap<Relationship, double[]>();
     	sanctionPayoffs.put(Relationship.FAMILY, new double[] {1.0, -1.0});
-//    	sanctionPayoffs.put(Relationship.FRIEND, new double[] {0.33, -0.67});
-//    	sanctionPayoffs.put(Relationship.COLLEAGUE, new double[] {0.67, -1});
-//    	sanctionPayoffs.put(Relationship.STRANGER, new double[] {0, -0.33});
     	sanctionPayoffs.put(Relationship.FRIEND, new double[] {0.75, -0.75});
     	sanctionPayoffs.put(Relationship.COLLEAGUE, new double[] {0.5, -5});
     	sanctionPayoffs.put(Relationship.STRANGER, new double[] {0.25, -0.25});
@@ -70,16 +59,6 @@ public class UpdatedBasePayoffCalculator extends PayoffCalculator {
     	
     	if (context.observerRelationship != null) {
     		payoff += relationshipPayoffs.get(context.observerRelationship)[actorAction.value] * relationshipMultiplier;
-//    		payoff += dist[0] * generalPayoffs.get(Values.HEALTH)[(int) (actorAction.value * 3 + context.observerHealth.getValue())] * generalMultiplier;
-//    		if (context.actorHealth.value == 2) {
-//    			payoff += dist[0] * generalPayoffs.get(Values.HEALTH)[1][(int) (actorAction.value * 3 + context.observerHealth.getValue())] * generalMultiplier;
-//    		} else {
-//    			payoff += dist[0] * generalPayoffs.get(Values.HEALTH)[0][(int) (actorAction.value * 3 + context.observerHealth.getValue())] * generalMultiplier;
-//    		}
-    	} else {
-    		// if no other agent around, assume it's safe environment
-//    		payoff += dist[0] * generalPayoffs.get(Values.HEALTH)[(int) (actorAction.value * 3)] * generalMultiplier;
-//    		payoff += dist[0] * generalPayoffs.get(Values.HEALTH)[0][(int) (actorAction.value * 3)] * generalMultiplier;
     	}
     	
     	payoff += dist[0] * generalPayoffs.get(Values.HEALTH)[(int) (actorAction.value * 2  + context.actorHealth.getValue())] * generalMultiplier;

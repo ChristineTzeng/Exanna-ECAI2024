@@ -16,10 +16,6 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- *
- * @author Hui
- */
 public class Agents extends SimState {
 
     //Which simulation are we doing?
@@ -226,12 +222,6 @@ public class Agents extends SimState {
                     "Avg_Payoff_in_Window",
                     "Avg_Satisfaction_in_Window",
             }).collect(Collectors.toList());
-//            for (AgentType type: AgentType.values()) {
-//                fields.add(String.format("Expected Payoff for %s agents", type.name().toLowerCase()));
-//            }
-//            for (AgentType type: AgentType.values()) {
-//                fields.add(String.format("Avg Expected Payoff for %s agents in Window", type.name().toLowerCase()));
-//            }
             for (AgentType type: AgentType.values()) {
                 fields.add(String.format("Expected_Actor_Payoff_for_%s_agents", type.name().toLowerCase()));
             }
@@ -309,13 +299,11 @@ public class Agents extends SimState {
             System.out.printf("%s: %d\n", agentTypes[typeId].name(), agentPopulationsBasedOnRatio[typeId]);
         }
         int currentAgentTypeId = 0;
-        //Debugger.debug(agentIdPermutation, "agentIdPerm");
         int[] counts = new int[3];
         int currentSet = 0;
         for (int i = 0; i < numAgents; i++) {
             int id = agentIdPermutation[i];
             Agent agent = (Agent) allAgents.get(id);
-            //Debugger.debug(i, "i", id, "id", agent.agentType, "type", currentAgentTypeId, "currentIt");
             while (currentSet >= agentPopulationsBasedOnRatio[currentAgentTypeId]) {
                 currentAgentTypeId++;
                 currentSet = 0;
@@ -326,7 +314,6 @@ public class Agents extends SimState {
             currentSet++;
         }
         Debugger.debug(counts, "actual counts");
-        //Debugger.debug(genCount, "actual generous count");
 
         //Each agent keeps lists of their family, colleagues and friends
         Agent temp;
@@ -379,21 +366,17 @@ public class Agents extends SimState {
                         //each agent keeps a record of their interaction for
                         //future classification
                         record = new RecordForLearning(temp.currentInteraction, agents, temp);
-//                        if (temp.id == 0)
-//                            System.out.println("Record ID: "+temp.data.numInstances()+"\t"+record.toCSVString());
 
-                        //temp.records.add(record);
-                        //also add to Weka dataset
-                        if (simulationNumber < 3) {
-                            temp.addRecord(record);
-                        } else if (isLCS()) {
+                        
+                        if (isLCS()) {
                             temp.addRecordLCS(record, temp.currentInteraction);
-                        }
+                        } 
+//                        else {
+//                        	//Weka dataset: removed
+//                        }
                         
                         temp.isPairedUp = false;
-//                        System.out.println(temp.id + " clearned");
                         temp.currentInteraction = null;
-//                        System.out.println("Steps: " + state.schedule.getSteps());
                     }
                 }
                 
@@ -576,7 +559,6 @@ public class Agents extends SimState {
                         //  Expected Payoff for {} agents
                         for (AgentType type : AgentType.values()) {
                             agentPayoffTokens.add(Double.toString(actorPayoffs.getAvgPayoff(type)));
-//                            Debugger.debug("actorPayoffAvg", actorPayoffs.getAvgPayoff(type));
                         }
                         // Avg Expected Payoff for {} agents in Window
                         agentTypeActorPayoffInWindow.clear();
@@ -631,8 +613,6 @@ public class Agents extends SimState {
         }
         if (payoffCalculator instanceof UpdatedBasePayoffCalculator) {
             builder.append("_updated_base");
-        } else if (payoffCalculator instanceof MultiEmergentNormBasePayoffCalculator) {
-            builder.append("_multi_updated_base");
         }
 
         if (trial != 0) {
@@ -719,14 +699,6 @@ public class Agents extends SimState {
         }
 
         allNorms.sort(Comparator.comparing(ElectionResult::getPopularityRatio).reversed());
-
-//        System.out.println();
-//        System.out.println("== All norm votes ==" + allNorms.size());
-//        for (ElectionResult electionResult : allNorms) {
-//        	if (electionResult.popularityRatio > 0.7) {
-//        		System.out.printf("[%s, popularity: %f]\n", electionResult.norm, electionResult.popularityRatio);
-//        	}
-//        }
 
         System.out.println();
         System.out.println("== All popular rules ===" + popularNorms.size());
@@ -873,7 +845,7 @@ public class Agents extends SimState {
     
     public static void main(String[] args){
     	
-    	SimState state = new Agents(System.currentTimeMillis()); // MyModel is our SimState subclass
+    	SimState state = new Agents(System.currentTimeMillis());
     	for(int job = 0; job < jobs; job++)
     	{
 	    	state.setJob(job);

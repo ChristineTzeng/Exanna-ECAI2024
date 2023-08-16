@@ -23,7 +23,6 @@ public class MatchingSet {
         double currWeight = Double.NEGATIVE_INFINITY;
         List<Action> decisions = new ArrayList<>();
         for (NormEntry entry : this.normEntries) {
-//            Debugger.debug(currWeight, "currWeight", entry, "entry", decisions, "decisions");
             if (entry.weight > currWeight) {
                 decisions.clear();
                 decisions.add(entry.norm.consequent);

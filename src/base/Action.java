@@ -1,5 +1,8 @@
 package base;
 
+/**
+ * Defines the action space
+ */
 public enum Action {
 	WEAR(0), NOT_WEAR(1);
 

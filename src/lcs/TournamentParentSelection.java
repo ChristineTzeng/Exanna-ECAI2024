@@ -14,16 +14,13 @@ public class TournamentParentSelection implements ParentSelectionStrategy {
         this.randomizer = randomizer;
     }
 
-    //TODO: use experience here: Not used in Butz paper
     @Override
     public Rule select(RuleSet ruleSet) {
         List<Rule> rules = ruleSet.getRules();
         int actionSetSize = rules.size();
-//        Debugger.debug(actionSetSize, "actionSetSize");
         int tournamentSize = (int)(Math.ceil(SELECTION_RATIO * actionSetSize));
         List<Rule> tournament = randomizer.sample(rules, actionSetSize, tournamentSize);
         List<Rule> maximumRules = new ArrayList<>();
-//        Debugger.debug(tournamentSize, "tournamentSize");
         double maxFitness = 0.0;
         for (Rule rule : tournament) {
             if (rule.fitness > maxFitness) {

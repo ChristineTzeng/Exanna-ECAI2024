@@ -28,10 +28,6 @@ public class BaseLCS implements LCSAlgorithm {
     private DeletionStrategy deletionStrategy;
     private ExplorationStrategy explorationStrategy;
 
-//    private boolean debug = false;
-//    private int temp = 0;
-//    private int maxTemp = 200;
-
     public BaseLCS(MersenneTwisterFast random,
                    ActionSelectionStrategy actionSelectionStrategy,
                    CoveringStrategy coveringStrategy,
@@ -108,6 +104,9 @@ public class BaseLCS implements LCSAlgorithm {
         return actionSet.getRules().stream().map(Rule::getNorm).collect(Collectors.toList());
     }
     
+    /**
+     * Wrapper function based on values
+     */
     @Override
     public List<Norm> filterValues(List<Norm> rules, List<AgentType> types) {
     	for (Norm rule : rules) {
@@ -121,6 +120,9 @@ public class BaseLCS implements LCSAlgorithm {
         return rules;
     }
     
+    /**
+     * Check if nonobservable information was revealed
+     */
     public int[] sharedInfo(List<Norm> rules) {
     	int[] results = {0, 0};
     	for (Norm rule : rules) {

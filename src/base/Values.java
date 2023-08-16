@@ -1,5 +1,8 @@
 package base;
 
+/**
+ * Defines values and their distributions
+ */
 public enum Values {
 	HEALTH (0), FREEDOM (1);
 	
