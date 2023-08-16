@@ -9,10 +9,6 @@ import simulation.ExplanationStats;
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author Hui
- */
 public class Interaction {
     public Agent actor;
     public Agent observer;

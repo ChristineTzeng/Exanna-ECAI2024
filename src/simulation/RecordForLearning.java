@@ -8,19 +8,13 @@ import base.Preference;
 
 import util.Debugger;
 
-/**
- *
- * @author Hui
- */
 public class RecordForLearning {
     
     public static String[] relationTypes = new String[]{"family", "colleague", "friend", "stranger"};
     
-//    public int actorAgentType;
 	public int observerAgentType;
     public int actorHealth;
     public int preference;
-//    public int observerHealth;
     
     public int location;
     public int observerRelationship;
@@ -49,7 +43,6 @@ public class RecordForLearning {
     public RecordForLearning(Interaction interaction, Agents agents, Agent agent){
         this.agent = agent;
         this.location = (int)(interaction.location/Agents.numAgents);
-//        this.actorAgentType = interaction.actor.agentType.getValue();
         this.actorHealth = interaction.actorHealth;
         this.preference = interaction.actor.preference;
         if (interaction.observer == null) {
@@ -58,7 +51,6 @@ public class RecordForLearning {
         	this.observerAgentType = -1;
         } else {
         	this.existsObserver = true;
-//        	this.observerHealth = interaction.observerHealth;
         	this.observerAgentType = interaction.observer.agentType.getValue();
 	        if (interaction.isFamily())
 	            this.observerRelationship = 0;
@@ -82,18 +74,11 @@ public class RecordForLearning {
         if (interaction.observer != null) {
 	        actorPayoff = agents.payoffCalculator.calculateActorPayoff(
 	        		Context.builder().interactLocation(Location.get(this.location))
-//	   				 .actorAgentType(interaction.actor.agentType)
-//	   				 .actorHealth(Health.get(interaction.actorHealth))
 	   				 .actorHealth(Health.get(interaction.actor.health))
 	   				 .preference(Preference.get(interaction.actor.preference))
 	   				 .observerAgentType(interaction.observer.agentType)
-//	   				 .observerHealth(Health.get(interaction.observerHealth))
 	   				 .observerRelationship(interaction.getInteractionRelationship())
 	   				 .build(), Action.fromID(interaction.action), interaction.actor.agentType.weights);
-		//	        observerPayoff = agents.payoffCalculator.calculateObserverPayoff(
-		//    		Context.builder().interactLocation(Location.get(interaction.location))
-		//                             .observerRelationship(Agent.getInteractionRelationship(interaction))
-		//                             .build(), Action.fromID(interaction.action));
 		
 		    Feedback feedback;
 		    for(int i=0;i<interaction.feedbacks.size();i++){
@@ -110,8 +95,6 @@ public class RecordForLearning {
         } else {
         	actorPayoff = agents.payoffCalculator.calculateActorPayoff(
         			Context.builder().interactLocation(Location.get(this.location))
-//      				 .actorAgentType(interaction.actor.agentType)
-//      				 .actorHealth(Health.get(interaction.actorHealth))
       				 .actorHealth(Health.get(interaction.actor.health))
       				 .preference(Preference.get(interaction.actor.preference))
       				 .observerRelationship(interaction.getInteractionRelationship())
@@ -132,7 +115,6 @@ public class RecordForLearning {
     
     public String toCSVString(){
         return Agents.locations[location] + ","
-//        		+ actorAgentType + ","
         		+ actorHealth + ","
                 + (existsObserver ? relationTypes[observerRelationship] : "None") + ","
                 + existsFamily + ","

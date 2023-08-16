@@ -1,9 +1,5 @@
 package simulation;
 
-/**
- *
- * @author Hui
- */
 public class Feedback {
     public Interaction interaction;
     public Agent giver;
