@@ -28,11 +28,7 @@ plot_figure.ipynb - To generate the graphs in the paper
 # Required packgaes or libraries
 
 For Java code: 
-jcommon-1.0.23.jar
-jfreechart-1.0.19.jar
-mason.19.jar
-weka-dev-3.7.6.jar
-xcsf-1.0.jar
+File under /lib folder
 
 For python code:
 
