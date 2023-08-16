@@ -28,7 +28,7 @@ plot_figure.ipynb - To generate the graphs in the paper
 # Required packgaes or libraries
 
 For Java code: 
-File under /lib folder
+jar files under /lib folder
 
 For python code:
 
